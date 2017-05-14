@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Nimebox</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Ustawienia</string>
+    <string name="drawer_item_main">News</string>
+
+</resources>
