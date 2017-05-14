@@ -5,7 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.koushikdutta.ion.Ion;
 import com.xdk78.nimebox.Model.Article;
 import com.xdk78.nimebox.R;
 
@@ -38,6 +41,9 @@ public class ArticleAdapter extends RecyclerView.Adapter {
         Article item = items.get(i);
 
         ((mViewHolder) viewHolder).title.setText(item.getTitle());
+        Ion.with(((mViewHolder) viewHolder).image)
+                //.placeholder(R.mipmap.ic_launcher)
+                .load(item.getImage());
         ((mViewHolder) viewHolder).description.setText(item.getDescription());
 
     }
@@ -49,11 +55,13 @@ public class ArticleAdapter extends RecyclerView.Adapter {
 
     private class mViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
+        public ImageView image;
         public TextView description;
 
         public mViewHolder(View pItem) {
             super(pItem);
             title = (TextView) pItem.findViewById(R.id.article_title);
+            image = (ImageView) pItem.findViewById(R.id.article_image);
             description = (TextView) pItem.findViewById(R.id.article_description);
         }
     }

@@ -72,13 +72,15 @@ public class JsoupParser extends AsyncTask<Void, Void, Void> {
 
                         String title = null;
                         String desciption = null;
+                        String image = null;
                         for (Element imagecards : imagecard) {
                             title = imagecards.select("span.card-title").text();
+                            image = imagecards.select("img[src]").attr("src");
                         }
 
                         desciption = cards.select("div.card-content").text();
 
-                        items.add(new Article(title, desciption, context));
+                        items.add(new Article(title, image, desciption, context));
                     }
                 }
 

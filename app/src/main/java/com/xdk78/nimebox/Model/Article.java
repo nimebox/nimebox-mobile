@@ -10,6 +10,7 @@ public class Article {
 
 
     private String title;
+    private String image;
     private String description;
     private Context context;
 
@@ -17,8 +18,9 @@ public class Article {
 
     }
 
-    public Article(String title, String description, Context context){
+    public Article(String title, String image, String description, Context context){
         this.title=title;
+        this.image=image;
         this.description=description;
         this.context=context;
     }
@@ -29,6 +31,14 @@ public class Article {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getDescription() {
