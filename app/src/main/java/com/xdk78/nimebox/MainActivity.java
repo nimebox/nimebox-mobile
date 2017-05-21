@@ -17,10 +17,10 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
+    private static Context context;
     //save our header or result
     private AccountHeader headerResult;
     private Drawer result;
-    private static Context context;
 
     public static Context getContext() {
         return context;
@@ -62,7 +62,9 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem()
                                 .withIdentifier(0).withName(R.string.drawer_item_main),
                         new PrimaryDrawerItem()
-                                .withIdentifier(1).withName(R.string.action_settings)
+                                .withIdentifier(1).withName(R.string.drawer_item_animes),
+                        new PrimaryDrawerItem()
+                                .withIdentifier(2).withName(R.string.action_settings)
 
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
@@ -84,8 +86,16 @@ public class MainActivity extends AppCompatActivity {
                                 ).commit();
                             }
                             else if (drawerItem.getIdentifier() == 1) {
+                                AnimesFragment animesFragment = new AnimesFragment();
+                                FragmentManager manager = getSupportFragmentManager();
+                                manager.beginTransaction().replace(
+                                        R.id.content_main,
+                                        animesFragment
+                                ).commit();
+                            } else if (drawerItem.getIdentifier() == 2) {
                                 return false;
                             }
+
                         }
 
                         return false;

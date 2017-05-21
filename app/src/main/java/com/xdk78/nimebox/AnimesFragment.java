@@ -8,20 +8,20 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 
-public class MainFragment extends Fragment {
+public class AnimesFragment extends Fragment {
 
     public View view;
 
-    public MainFragment() {
+    public AnimesFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_main, container, false);
+        view = inflater.inflate(R.layout.fragment_animes, container, false);
         ButterKnife.bind(this, view);
-        new ArticleJsoupParser(getContext(), view).execute();
+        new AnimesJsoupParser(getContext(), view).execute();
         return view;
     }
 

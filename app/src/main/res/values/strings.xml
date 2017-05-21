@@ -6,5 +6,7 @@
 
     <string name="action_settings">Ustawienia</string>
     <string name="drawer_item_main">News</string>
+    <string name="drawer_item_animes">Lista anime</string>
+    <string name="thumbnail">thumbnail</string>
 
 </resources>

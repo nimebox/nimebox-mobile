@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.xdk78.nimebox.Adapter.ArticleAdapter;
 import com.xdk78.nimebox.Model.Article;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -17,27 +18,29 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.xdk78.nimebox.Utils.BASE_URL;
 
 /**
  * Created by xdk78 on 2017-05-14.
  */
 
-public class JsoupParser extends AsyncTask<Void, Void, Void> {
-
-    public static String BASE_URL = "http://www.senpai.com.pl";
-    private ArrayList<Article> items;
-    private Context context;
-    private ProgressDialog mProgressDialog;
-    public String pageTitle;
-
+public class ArticleJsoupParser extends AsyncTask<Void, Void, Void> {
 
     @BindView(R.id.articles)
     RecyclerView recyclerView;
+    private ArrayList<Article> items;
+    private Context context;
+    private ProgressDialog mProgressDialog;
+    private String title = null;
+    private String desciption = null;
+    private String image = null;
 
 
-    JsoupParser(Context context, View view) {
+    ArticleJsoupParser(Context context, View view) {
         this.context = context;
         ButterKnife.bind(this, view);
     }
@@ -49,7 +52,7 @@ public class JsoupParser extends AsyncTask<Void, Void, Void> {
         mProgressDialog.setTitle("Nimebox");
         mProgressDialog.setMessage("Ładowanie...");
         mProgressDialog.setIndeterminate(false);
-        //mProgressDialog.setCancelable(false);
+        mProgressDialog.setCancelable(false);
         mProgressDialog.show();
     }
 
@@ -70,9 +73,6 @@ public class JsoupParser extends AsyncTask<Void, Void, Void> {
                     for (Element cards : card) {
                         Elements imagecard = cards.select("div.card-image");
 
-                        String title = null;
-                        String desciption = null;
-                        String image = null;
                         for (Element imagecards : imagecard) {
                             title = imagecards.select("span.card-title").text();
                             image = imagecards.select("img[src]").attr("src");
@@ -80,13 +80,9 @@ public class JsoupParser extends AsyncTask<Void, Void, Void> {
 
                         desciption = cards.select("div.card-content").text();
 
-                        items.add(new Article(title, image, desciption, context));
+                        items.add(new Article(title, image.replace(" ", "%20"), desciption, context));
                     }
                 }
-
-                // Get title
-                pageTitle = full.title();
-
 
         } catch (IOException e) {
             e.printStackTrace();
