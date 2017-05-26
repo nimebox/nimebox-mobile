@@ -13,42 +13,47 @@ import com.xdk78.nimebox.Model.Article;
 import com.xdk78.nimebox.R;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by xdk78 on 2017-05-14.
  */
 
-public class ArticleAdapter extends RecyclerView.Adapter {
+public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleiewHolder> {
 
-    private ArrayList<Article> items;
+    private List<Article> items = new ArrayList<>();
     private Context context;
 
-    public ArticleAdapter(ArrayList<Article> items, Context context) {
+    public ArticleAdapter(List<Article> items, Context context) {
         this.items = items;
         this.context = context;
     }
 
-
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
-        View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.article_layout, viewGroup, false);
-        return new mViewHolder(view);
+    public void addItems(List<Article> items) {
+        this.items.addAll(items);
+        notifyDataSetChanged();
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int i) {
+    public ArticleiewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.article_layout, viewGroup, false);
+        return new ArticleiewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(ArticleiewHolder viewHolder, final int i) {
         Article item = items.get(i);
 
-        ((mViewHolder) viewHolder).title.setText(item.getTitle());
+        viewHolder.title.setText(item.getTitle());
 
-        Ion.with(context)
-                .load(item.getImage())
-                .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
-                .withBitmap()
-                .intoImageView(((mViewHolder) viewHolder).image);
+        Ion.with((viewHolder).image)
+                .load(item.getImage().replace(" ", "%20"));
 
-        ((mViewHolder) viewHolder).description.setText(item.getDescription());
+        viewHolder.description.setText(item.getDescription());
 
     }
 
@@ -57,16 +62,20 @@ public class ArticleAdapter extends RecyclerView.Adapter {
         return items.size();
     }
 
-    private class mViewHolder extends RecyclerView.ViewHolder {
-        public TextView title;
-        public ImageView image;
-        public TextView description;
+    class ArticleiewHolder extends RecyclerView.ViewHolder {
 
-        public mViewHolder(View pItem) {
-            super(pItem);
-            title = (TextView) pItem.findViewById(R.id.article_title);
-            image = (ImageView) pItem.findViewById(R.id.article_image);
-            description = (TextView) pItem.findViewById(R.id.article_description);
+        @BindView(R.id.article_title)
+        TextView title;
+
+        @BindView(R.id.article_description)
+        TextView description;
+
+        @BindView(R.id.article_image)
+        ImageView image;
+
+        public ArticleiewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
         }
     }
 }

@@ -2,17 +2,25 @@ package com.xdk78.nimebox.Model;
 
 import android.content.Context;
 
+import com.github.florent37.retrojsoup.annotations.JsoupAttr;
+import com.github.florent37.retrojsoup.annotations.JsoupText;
+
 /**
  * Created by xdk78 on 2017-05-14.
  */
 
 public class Article {
 
+    @JsoupText("span.card-title")
+    String title;
 
-    private String title;
-    private String image;
-    private String description;
-    private Context context;
+    @JsoupText("div.card-content")
+    String description;
+
+    @JsoupAttr(value = "img[src]", attr = "src")
+    String image;
+
+    Context context;
 
     public Article(){
 

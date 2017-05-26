@@ -8,5 +8,9 @@
     <string name="drawer_item_main">News</string>
     <string name="drawer_item_animes">Lista anime</string>
     <string name="thumbnail">thumbnail</string>
+    <string name="anime_title">Anime Title</string>
+    <string name="newest_episode">Najnowszy odc:</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
 
 </resources>

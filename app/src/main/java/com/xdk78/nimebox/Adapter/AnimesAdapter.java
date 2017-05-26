@@ -13,43 +13,48 @@ import com.xdk78.nimebox.Model.Animes;
 import com.xdk78.nimebox.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.xdk78.nimebox.Utils.BASE_URL;
 
 /**
  * Created by xdk78 on 2017-05-14.
  */
 
-public class AnimesAdapter extends RecyclerView.Adapter {
+public class AnimesAdapter extends RecyclerView.Adapter<AnimesAdapter.AnimesViewHolder> {
 
-    private ArrayList<Animes> items;
+    private List<Animes> items = new ArrayList<>();
     private Context context;
 
-    public AnimesAdapter(ArrayList<Animes> items, Context context) {
+    public AnimesAdapter(List<Animes> items, Context context) {
         this.items = items;
         this.context = context;
     }
 
-
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
-        View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.animes_layout, viewGroup, false);
-        return new mViewHolder(view);
+    public void addItems(List<Animes> items) {
+        this.items.addAll(items);
+        notifyDataSetChanged();
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int i) {
+    public AnimesViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
+        View view = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.animes_layout, viewGroup, false);
+        return new AnimesViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(AnimesViewHolder viewHolder, final int i) {
         Animes item = items.get(i);
 
-        ((mViewHolder) viewHolder).title.setText(item.getTitle());
-        ((mViewHolder) viewHolder).newest_episode.setText(item.getNewest_episode());
+        viewHolder.title.setText(item.getTitle());
+        viewHolder.newest_episode.setText(item.getNewest_episode());
+        Ion.with((viewHolder).anime_image)
+                .load(BASE_URL + item.getAnime_image().replace(" ", "%20"));
 
-        Ion.with(context)
-                .load(item.getAnime_image())
-                .userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36")
-                .intoImageView(((mViewHolder) viewHolder).anime_image);
     }
 
     @Override
@@ -57,8 +62,7 @@ public class AnimesAdapter extends RecyclerView.Adapter {
         return items.size();
     }
 
-    class mViewHolder extends RecyclerView.ViewHolder {
-
+    class AnimesViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.anime_title)
         TextView title;
@@ -69,7 +73,7 @@ public class AnimesAdapter extends RecyclerView.Adapter {
         @BindView(R.id.anime_image)
         ImageView anime_image;
 
-        public mViewHolder(View view) {
+        public AnimesViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
 

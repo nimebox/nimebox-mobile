@@ -20,7 +20,7 @@
             android:id="@+id/article_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Title"
+            android:text="@string/title"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="18sp" />
 
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Content"
+            android:text="@string/description"
             android:textColor="?android:attr/textColorSecondary"
             android:textSize="14sp" />
 

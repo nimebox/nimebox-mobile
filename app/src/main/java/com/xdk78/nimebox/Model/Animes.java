@@ -2,17 +2,26 @@ package com.xdk78.nimebox.Model;
 
 import android.content.Context;
 
+import com.github.florent37.retrojsoup.annotations.JsoupAttr;
+import com.github.florent37.retrojsoup.annotations.JsoupText;
+
+
 /**
  * Created by xdk78 on 2017-05-21.
  */
 
 public class Animes {
 
-    private String title;
-    private String newest_episode;
-    private String anime_image;
-    private Context context;
+    @JsoupText("span.title.anime-title")
+    String title;
 
+    @JsoupText("span.grey-text.text-lighten-1")
+    String newest_episode;
+
+    @JsoupAttr(value = "img[src]", attr = "src")
+    String anime_image;
+
+    Context context;
 
     public Animes() {
 
@@ -49,4 +58,5 @@ public class Animes {
     public void setAnime_image(String anime_image) {
         this.anime_image = anime_image;
     }
+
 }

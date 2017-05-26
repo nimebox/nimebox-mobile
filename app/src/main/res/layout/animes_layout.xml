@@ -33,8 +33,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/anime_image"
-            android:text="Anime_title"
-            android:textSize="30sp" />
+            android:text="@string/anime_title"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/anime_newest_episode"
@@ -42,7 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/anime_title"
             android:layout_toEndOf="@+id/anime_image"
-            android:text="Najnowszy odc: " />
+            android:text="@string/newest_episode"
+            android:textSize="14sp" />
 
     </RelativeLayout>
 
