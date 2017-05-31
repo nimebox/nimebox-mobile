@@ -12,5 +12,7 @@
     <string name="newest_episode">Najnowszy odc:</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
+    <string name="episodeNumber">Episode Number</string>
+    <string name="title_activity_anime">AnimeActivity</string>
 
 </resources>

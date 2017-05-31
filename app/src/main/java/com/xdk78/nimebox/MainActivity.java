@@ -86,11 +86,11 @@ public class MainActivity extends AppCompatActivity {
                                 ).commit();
                             }
                             else if (drawerItem.getIdentifier() == 1) {
-                                AnimesFragment animesFragment = new AnimesFragment();
+                                AnimeListFragment animeListFragment = new AnimeListFragment();
                                 FragmentManager manager = getSupportFragmentManager();
                                 manager.beginTransaction().replace(
                                         R.id.content_main,
-                                        animesFragment
+                                        animeListFragment
                                 ).commit();
                             } else if (drawerItem.getIdentifier() == 2) {
                                 return false;

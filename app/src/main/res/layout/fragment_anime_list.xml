@@ -2,11 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.xdk78.nimebox.MainFragment">
+    tools:context="com.xdk78.nimebox.AnimeListFragment">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/animes"
+        android:id="@+id/anime_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" />
 
 </FrameLayout>

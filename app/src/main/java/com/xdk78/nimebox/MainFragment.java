@@ -1,13 +1,13 @@
 package com.xdk78.nimebox;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.github.florent37.retrojsoup.RetroJsoup;
 import com.xdk78.nimebox.Adapter.ArticleAdapter;
@@ -80,7 +80,7 @@ public class MainFragment extends Fragment {
 
                                    @Override
                                    public void onError(Throwable e) {
-                                       Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
+                                       Snackbar.make(view, e.toString(), Snackbar.LENGTH_LONG).show();
                                    }
                                }
                 );

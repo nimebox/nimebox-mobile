@@ -6,15 +6,15 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    cardview:cardCornerRadius="2dp"
-    cardview:cardElevation="3dp"
+    cardview:cardCornerRadius="1dp"
+    cardview:cardElevation="1dp"
     cardview:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="15dp">
 
         <TextView
             android:id="@+id/article_title"

@@ -26,13 +26,6 @@ public class Article {
 
     }
 
-    public Article(String title, String image, String description, Context context){
-        this.title=title;
-        this.image=image;
-        this.description=description;
-        this.context=context;
-    }
-
     public String getTitle() {
         return title;
     }
