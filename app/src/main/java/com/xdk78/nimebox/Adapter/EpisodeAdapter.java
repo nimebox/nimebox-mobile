@@ -3,6 +3,10 @@ package com.xdk78.nimebox.Adapter;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.support.customtabs.CustomTabsIntent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -21,6 +25,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static com.xdk78.nimebox.EpisodeActivity.getContext;
 
 
@@ -55,7 +60,14 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.EpisodeV
         Episode item = items.get(i);
 
         viewHolder.playerUrl.setText(item.getPlayerUrl());
-        System.out.println(item.getPlayerUrl().replace(" ", "%20"));
+
+        viewHolder.itemView.setOnClickListener(view -> {
+            CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+            builder.setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary));
+            CustomTabsIntent customTabsIntent = builder.build();
+            customTabsIntent.launchUrl(context, Uri.parse(item.getPlayerUrl()));
+        });
+
     }
 
     @Override
@@ -73,22 +85,20 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.EpisodeV
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case 0:
-                        ClipboardManager myClickboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                        ClipboardManager myClickboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
                         ClipData myClip = ClipData.newPlainText("text", playerUrl.getText().toString());
                         myClickboard.setPrimaryClip(myClip);
-
                         Toast.makeText(getContext(), "Skopiowano link", Toast.LENGTH_SHORT).show();
-
                         break;
-                    /*case 1:
+
+                    case 1:
                         Intent shareIntent = new Intent(Intent.ACTION_SEND);
                         shareIntent.setType("text/plain");
                         shareIntent.putExtra(Intent.EXTRA_TEXT, playerUrl.getText());
                         shareIntent.addFlags(FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(Intent.createChooser(shareIntent, context.getResources().getText(R.string.share_link)));
-
                      break;
-                      */
+
                 }
                 return true;
             }
@@ -103,9 +113,9 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.EpisodeV
         @Override
         public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo menuInfo) {
             MenuItem CopyText = menu.add(0, 0, 0, "Kopiuj link");//groupId, itemId, order, title
-            //MenuItem ShareUrl = menu.add(0, 1, 0, "Udostępnij link");
+            MenuItem ShareUrl = menu.add(0, 1, 0, "Udostępnij link");
             CopyText.setOnMenuItemClickListener(onEditMenu);
-            //ShareUrl.setOnMenuItemClickListener(onEditMenu);
+            ShareUrl.setOnMenuItemClickListener(onEditMenu);
         }
 
 

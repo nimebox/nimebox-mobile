@@ -68,8 +68,8 @@ public class AnimeActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.anime);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new AnimeAdapter(anime = new ArrayList<>(), getContext());
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new AnimeAdapter(anime = new ArrayList<>(), this);
         recyclerView.setAdapter(adapter);
 
         loadAnimeAPI();

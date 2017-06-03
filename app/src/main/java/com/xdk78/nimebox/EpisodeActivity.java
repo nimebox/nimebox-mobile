@@ -68,8 +68,8 @@ public class EpisodeActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.episode);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new EpisodeAdapter(episodes = new ArrayList<>(), getContext());
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new EpisodeAdapter(episodes = new ArrayList<>(), this);
         recyclerView.setAdapter(adapter);
 
         loadEpisodeAPI();
