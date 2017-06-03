@@ -20,6 +20,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static com.xdk78.nimebox.Utils.BASE_URL;
 
 /**
@@ -57,16 +58,13 @@ public class AnimeListAdapter extends RecyclerView.Adapter<AnimeListAdapter.Anim
         Ion.with((viewHolder).anime_image)
                 .load(BASE_URL + item.getAnimeImage().replace(" ", "%20"));
 
+        viewHolder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(context, AnimeActivity.class);
+            intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("animeUrl", (BASE_URL + item.getAnimeUrl().replace(" ", "%20")));
+            intent.putExtra("animeTitle", item.getTitle());
+            context.startActivity(intent);
 
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, AnimeActivity.class);
-                intent.putExtra("animeUrl", (BASE_URL + item.getAnimeUrl().replace(" ", "%20")));
-                intent.putExtra("animeTitle", item.getTitle());
-                context.startActivity(intent);
-
-            }
         });
     }
 

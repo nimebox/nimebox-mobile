@@ -14,5 +14,9 @@
     <string name="description">Description</string>
     <string name="episodeNumber">Episode Number</string>
     <string name="title_activity_anime">AnimeActivity</string>
+    <string name="title_activity_episode">EpisodeActivity</string>
+    <string name="player">player</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="share_link">Udostępnij link</string>
 
 </resources>
