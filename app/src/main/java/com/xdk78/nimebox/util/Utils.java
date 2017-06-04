@@ -1,4 +1,4 @@
-package com.xdk78.nimebox;
+package com.xdk78.nimebox.util;
 
 /**
  * Created by xdk78 on 2017-05-21.

@@ -1,4 +1,4 @@
-package com.xdk78.nimebox.Model;
+package com.xdk78.nimebox.model;
 
 import android.content.Context;
 

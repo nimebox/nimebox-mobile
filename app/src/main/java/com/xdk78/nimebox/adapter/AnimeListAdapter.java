@@ -1,4 +1,4 @@
-package com.xdk78.nimebox.Adapter;
+package com.xdk78.nimebox.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,9 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.koushikdutta.ion.Ion;
-import com.xdk78.nimebox.AnimeActivity;
-import com.xdk78.nimebox.Model.AnimeList;
 import com.xdk78.nimebox.R;
+import com.xdk78.nimebox.model.AnimeList;
+import com.xdk78.nimebox.ui.AnimeActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-import static com.xdk78.nimebox.Utils.BASE_URL;
+import static com.xdk78.nimebox.util.Utils.BASE_URL;
 
 /**
  * Created by xdk78 on 2017-05-14.

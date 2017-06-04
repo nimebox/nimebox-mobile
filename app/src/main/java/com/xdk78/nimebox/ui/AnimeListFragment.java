@@ -1,4 +1,4 @@
-package com.xdk78.nimebox;
+package com.xdk78.nimebox.ui;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -10,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.florent37.retrojsoup.RetroJsoup;
-import com.xdk78.nimebox.Adapter.ArticleAdapter;
-import com.xdk78.nimebox.Model.Article;
+import com.xdk78.nimebox.R;
+import com.xdk78.nimebox.adapter.AnimeListAdapter;
+import com.xdk78.nimebox.api.APIService;
+import com.xdk78.nimebox.model.AnimeList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,58 +26,58 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 
-import static com.xdk78.nimebox.Utils.BASE_URL;
+import static com.xdk78.nimebox.util.Utils.ANIME_URL;
 
-public class MainFragment extends Fragment {
+public class AnimeListFragment extends Fragment {
 
     public View view;
     private RecyclerView recyclerView;
-    private ArticleAdapter adapter;
-    private List<Article> articles;
+    private AnimeListAdapter adapter;
+    private List<AnimeList> animeList;
     private Unbinder unbinder;
 
-    public MainFragment() {
+    public AnimeListFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_main, container, false);
+        view = inflater.inflate(R.layout.fragment_anime_list, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.articles);
+        recyclerView = (RecyclerView) view.findViewById(R.id.anime_list);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new ArticleAdapter(articles = new ArrayList<>(), getContext());
+        adapter = new AnimeListAdapter(animeList = new ArrayList<>(), getContext());
         recyclerView.setAdapter(adapter);
 
-        loadArticleAPI();
+        loadAnimesAPI();
         return view;
     }
 
-    public void loadArticleAPI() {
+    public void loadAnimesAPI() {
         final OkHttpClient okHttpClient = new OkHttpClient();
 
-        final APIService articleService = new RetroJsoup.Builder()
-                .url(BASE_URL)
+        final APIService animeAPI = new RetroJsoup.Builder()
+                .url(ANIME_URL)
                 .client(okHttpClient)
                 .build()
                 .create(APIService.class);
 
-        articleService.articles()
+        animeAPI.animeList()
                 .toList()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new SingleObserver<List<Article>>() {
+                .subscribeWith(new SingleObserver<List<AnimeList>>() {
                                    @Override
                                    public void onSubscribe(Disposable d) {
 
                                    }
 
                                    @Override
-                                   public void onSuccess(List<Article> articles) {
-                                       adapter.addItems(articles);
+                                   public void onSuccess(List<AnimeList> animeList) {
+                                       adapter.addItems(animeList);
                                    }
 
                                    @Override

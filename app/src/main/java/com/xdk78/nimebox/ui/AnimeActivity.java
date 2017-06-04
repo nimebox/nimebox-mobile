@@ -1,4 +1,4 @@
-package com.xdk78.nimebox;
+package com.xdk78.nimebox.ui;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,8 +12,10 @@ import android.view.View;
 import com.github.florent37.retrojsoup.RetroJsoup;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.xdk78.nimebox.Adapter.AnimeAdapter;
-import com.xdk78.nimebox.Model.Anime;
+import com.xdk78.nimebox.R;
+import com.xdk78.nimebox.adapter.AnimeAdapter;
+import com.xdk78.nimebox.api.APIService;
+import com.xdk78.nimebox.model.Anime;
 
 import java.util.ArrayList;
 import java.util.List;

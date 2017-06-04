@@ -1,4 +1,4 @@
-package com.xdk78.nimebox;
+package com.xdk78.nimebox.ui;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.xdk78.nimebox.R;
 
 import butterknife.ButterKnife;
 

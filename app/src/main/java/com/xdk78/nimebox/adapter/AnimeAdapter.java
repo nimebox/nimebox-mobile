@@ -1,4 +1,4 @@
-package com.xdk78.nimebox.Adapter;
+package com.xdk78.nimebox.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.xdk78.nimebox.EpisodeActivity;
-import com.xdk78.nimebox.Model.Anime;
 import com.xdk78.nimebox.R;
+import com.xdk78.nimebox.model.Anime;
+import com.xdk78.nimebox.ui.EpisodeActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-import static com.xdk78.nimebox.Utils.BASE_URL;
+import static com.xdk78.nimebox.util.Utils.BASE_URL;
 
 
 /**

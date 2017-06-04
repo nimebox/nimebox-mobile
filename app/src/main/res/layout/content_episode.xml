@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".EpisodeActivity"
+    tools:context=".ui.EpisodeActivity"
     tools:showIn="@layout/activity_episode">
 
     <android.support.v7.widget.RecyclerView

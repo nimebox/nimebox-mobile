@@ -1,4 +1,4 @@
-package com.xdk78.nimebox.Adapter;
+package com.xdk78.nimebox.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.koushikdutta.ion.Ion;
-import com.xdk78.nimebox.Model.Article;
 import com.xdk78.nimebox.R;
+import com.xdk78.nimebox.model.Article;
 
 import java.util.ArrayList;
 import java.util.List;

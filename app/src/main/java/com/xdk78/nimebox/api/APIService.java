@@ -1,10 +1,10 @@
-package com.xdk78.nimebox;
+package com.xdk78.nimebox.api;
 
 import com.github.florent37.retrojsoup.annotations.Select;
-import com.xdk78.nimebox.Model.Anime;
-import com.xdk78.nimebox.Model.AnimeList;
-import com.xdk78.nimebox.Model.Article;
-import com.xdk78.nimebox.Model.Episode;
+import com.xdk78.nimebox.model.Anime;
+import com.xdk78.nimebox.model.AnimeList;
+import com.xdk78.nimebox.model.Article;
+import com.xdk78.nimebox.model.Episode;
 
 import io.reactivex.Observable;
 
