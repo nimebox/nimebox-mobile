@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.koushikdutta.ion.Ion;
+import com.bumptech.glide.Glide;
 import com.xdk78.nimebox.R;
 import com.xdk78.nimebox.model.AnimeList;
 import com.xdk78.nimebox.ui.AnimeActivity;
@@ -55,8 +55,11 @@ public class AnimeListAdapter extends RecyclerView.Adapter<AnimeListAdapter.Anim
 
         viewHolder.title.setText(item.getTitle());
         viewHolder.newest_episode.setText(item.getNewestEpisode());
-        Ion.with((viewHolder).anime_image)
-                .load(BASE_URL + item.getAnimeImage().replace(" ", "%20"));
+
+        Glide.with(context)
+                .asDrawable()
+                .load(BASE_URL + item.getAnimeImage().replace(" ", "%20"))
+                .into((viewHolder).anime_image);
 
         viewHolder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, AnimeActivity.class);

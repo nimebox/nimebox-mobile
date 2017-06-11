@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.koushikdutta.ion.Ion;
+import com.bumptech.glide.Glide;
 import com.xdk78.nimebox.R;
 import com.xdk78.nimebox.model.Article;
 
@@ -17,6 +17,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 
 /**
  * Created by xdk78 on 2017-05-14.
@@ -50,8 +51,10 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.Articlei
 
         viewHolder.title.setText(item.getTitle());
 
-        Ion.with((viewHolder).image)
-                .load(item.getImage().replace(" ", "%20"));
+        Glide.with(context)
+                .asDrawable()
+                .load(item.getImage().replace(" ", "%20"))
+                .into((viewHolder).image);
 
         viewHolder.description.setText(item.getDescription());
 
