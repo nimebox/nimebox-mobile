@@ -26,7 +26,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-import static com.xdk78.nimebox.ui.EpisodeActivity.getContext;
 
 
 /**
@@ -88,7 +87,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.EpisodeV
                         ClipboardManager myClickboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
                         ClipData myClip = ClipData.newPlainText("text", playerUrl.getText().toString());
                         myClickboard.setPrimaryClip(myClip);
-                        Toast.makeText(getContext(), "Skopiowano link", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Skopiowano link", Toast.LENGTH_SHORT).show();
                         break;
 
                     case 1:

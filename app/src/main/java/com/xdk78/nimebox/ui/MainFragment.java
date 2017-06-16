@@ -30,7 +30,7 @@ import static com.xdk78.nimebox.util.Utils.BASE_URL;
 
 public class MainFragment extends Fragment {
 
-    public View view;
+    private View view;
     private RecyclerView recyclerView;
     private ArticleAdapter adapter;
     private List<Article> articles;

@@ -1,6 +1,5 @@
 package com.xdk78.nimebox.ui;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -30,19 +29,14 @@ import okhttp3.OkHttpClient;
 
 public class AnimeActivity extends AppCompatActivity {
 
-    private static Context context;
-    String animeUrl;
-    String animeTitle;
+    private String animeUrl;
+    private String animeTitle;
     private RecyclerView recyclerView;
     private AnimeAdapter adapter;
     private List<Anime> anime;
     private Unbinder unbinder;
     private View view;
     private Drawer result = null;
-
-    public static Context getContext() {
-        return context;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +53,6 @@ public class AnimeActivity extends AppCompatActivity {
 
         toolbar.setNavigationOnClickListener(view1 -> onBackPressed());
 
-        context = getApplicationContext();
         unbinder = ButterKnife.bind(this);
 
         result = new DrawerBuilder()

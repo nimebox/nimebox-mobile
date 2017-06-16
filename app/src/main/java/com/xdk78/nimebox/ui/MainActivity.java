@@ -1,6 +1,5 @@
 package com.xdk78.nimebox.ui;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -18,14 +17,9 @@ import com.xdk78.nimebox.R;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
-    private static Context context;
-    //save our header or result
+
     private AccountHeader headerResult;
     private Drawer result;
-
-    public static Context getContext() {
-        return context;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        context = getApplicationContext();
 
         MainFragment mainFragment = new MainFragment();
         FragmentManager manager = getSupportFragmentManager();

@@ -1,6 +1,5 @@
 package com.xdk78.nimebox.ui;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -30,9 +29,8 @@ import okhttp3.OkHttpClient;
 
 public class EpisodeActivity extends AppCompatActivity {
 
-    private static Context context;
-    String episodeUrl;
-    String episodeNumber;
+    private String episodeUrl;
+    private String episodeNumber;
     private RecyclerView recyclerView;
     private EpisodeAdapter adapter;
     private List<Episode> episodes;
@@ -40,9 +38,6 @@ public class EpisodeActivity extends AppCompatActivity {
     private View view;
     private Drawer result = null;
 
-    public static Context getContext() {
-        return context;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +53,6 @@ public class EpisodeActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(episodeNumber);
 
         toolbar.setNavigationOnClickListener(view1 -> onBackPressed());
-
-        context = getApplicationContext();
         unbinder = ButterKnife.bind(this);
 
         result = new DrawerBuilder()
