@@ -1,6 +1,5 @@
 package com.xdk78.nimebox.model;
 
-import android.content.Context;
 
 import com.github.florent37.retrojsoup.annotations.JsoupAttr;
 import com.github.florent37.retrojsoup.annotations.JsoupHref;
@@ -24,8 +23,6 @@ public class AnimeList {
 
     @JsoupHref("a.collection-item.anime-item.col.l6.m6.s12")
     String animeUrl;
-
-    Context context;
 
     public AnimeList() {
 
@@ -59,7 +56,7 @@ public class AnimeList {
         return animeUrl;
     }
 
-    public void setAnimeUrle(String animeUrl) {
+    public void setAnimeUrl(String animeUrl) {
         this.animeUrl = animeUrl;
     }
 

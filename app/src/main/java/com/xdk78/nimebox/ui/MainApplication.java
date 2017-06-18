@@ -20,7 +20,7 @@ public class MainApplication extends Application {
 
     @Override
     public void onCreate() {
-        context = getApplicationContext();
         super.onCreate();
+        context = getApplicationContext();
     }
 }

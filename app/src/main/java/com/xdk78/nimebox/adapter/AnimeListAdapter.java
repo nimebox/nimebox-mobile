@@ -27,7 +27,7 @@ import static com.xdk78.nimebox.util.Utils.BASE_URL;
  * Created by xdk78 on 2017-05-14.
  */
 
-public class AnimeListAdapter extends RecyclerView.Adapter<AnimeListAdapter.AnimesViewHolder> {
+public class AnimeListAdapter extends RecyclerView.Adapter<AnimeListAdapter.AnimeListViewHolder> {
 
     private List<AnimeList> items = new ArrayList<>();
     private Context context;
@@ -43,14 +43,14 @@ public class AnimeListAdapter extends RecyclerView.Adapter<AnimeListAdapter.Anim
     }
 
     @Override
-    public AnimesViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
+    public AnimeListViewHolder onCreateViewHolder(ViewGroup viewGroup, final int i) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.anime_list_layout, viewGroup, false);
-        return new AnimesViewHolder(view);
+        return new AnimeListViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(AnimesViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(AnimeListViewHolder viewHolder, final int i) {
         AnimeList item = items.get(i);
 
         viewHolder.title.setText(item.getTitle());
@@ -76,7 +76,7 @@ public class AnimeListAdapter extends RecyclerView.Adapter<AnimeListAdapter.Anim
         return items.size();
     }
 
-    class AnimesViewHolder extends RecyclerView.ViewHolder {
+    class AnimeListViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.anime_title)
         TextView title;
@@ -87,7 +87,7 @@ public class AnimeListAdapter extends RecyclerView.Adapter<AnimeListAdapter.Anim
         @BindView(R.id.anime_image)
         ImageView anime_image;
 
-        public AnimesViewHolder(View view) {
+        public AnimeListViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
 

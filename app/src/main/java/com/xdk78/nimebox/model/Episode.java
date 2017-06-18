@@ -1,6 +1,5 @@
 package com.xdk78.nimebox.model;
 
-import android.content.Context;
 
 import com.github.florent37.retrojsoup.annotations.JsoupSrc;
 
@@ -14,8 +13,6 @@ public class Episode {
 
     @JsoupSrc("IFRAME")
     String playerUrl;
-
-    Context context;
 
     public Episode() {
 

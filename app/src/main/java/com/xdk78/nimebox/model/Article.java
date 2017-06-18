@@ -1,7 +1,5 @@
 package com.xdk78.nimebox.model;
 
-import android.content.Context;
-
 import com.github.florent37.retrojsoup.annotations.JsoupAttr;
 import com.github.florent37.retrojsoup.annotations.JsoupText;
 
@@ -19,8 +17,6 @@ public class Article {
 
     @JsoupAttr(value = "img[src]", attr = "src")
     String image;
-
-    Context context;
 
     public Article(){
 

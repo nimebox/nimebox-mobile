@@ -6,7 +6,7 @@
 
     <string name="action_settings">Ustawienia</string>
     <string name="drawer_item_main">News</string>
-    <string name="drawer_item_animes">Lista anime</string>
+    <string name="drawer_item_anime">Lista anime</string>
     <string name="thumbnail">thumbnail</string>
     <string name="anime_title">Anime Title</string>
     <string name="newest_episode">Najnowszy odc:</string>
@@ -18,5 +18,9 @@
     <string name="player">player</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="share_link">Udostępnij link</string>
+    <string name="drawer_item_senpai">Senpai</string>
+    <string name="drawer_item_manga">Manga</string>
+    <string name="manga_title">Manga Title</string>
+    <string name="newest_chapter">Najnowszy rozdział:</string>
 
 </resources>

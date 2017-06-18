@@ -5,6 +5,7 @@ import com.xdk78.nimebox.model.Anime;
 import com.xdk78.nimebox.model.AnimeList;
 import com.xdk78.nimebox.model.Article;
 import com.xdk78.nimebox.model.Episode;
+import com.xdk78.nimebox.model.MangaList;
 
 import io.reactivex.Observable;
 
@@ -13,6 +14,13 @@ import io.reactivex.Observable;
  */
 
 public interface APIService {
+
+    /* Article/News */
+
+    @Select("div.card.medium")
+    Observable<Article> articles();
+
+    /* Anime */
 
     @Select("div.collection.row.anime-col")
     Observable<AnimeList> animeList();
@@ -23,7 +31,10 @@ public interface APIService {
     @Select("div.video-container")
     Observable<Episode> episode();
 
-    @Select("div.card.medium")
-    Observable<Article> articles();
+    /* Manga */
+
+    @Select("div.collection.row.manga-col")
+    Observable<MangaList> mangaList();
+
 
 }
