@@ -1,5 +1,6 @@
 package com.xdk78.nimebox.api;
 
+import com.github.florent37.retrojsoup.RetroJsoup;
 import com.github.florent37.retrojsoup.annotations.Select;
 import com.xdk78.nimebox.model.Anime;
 import com.xdk78.nimebox.model.AnimeList;
@@ -36,5 +37,12 @@ public interface APIService {
     @Select("div.collection.row.manga-col")
     Observable<MangaList> mangaList();
 
-
+    class Factory {
+        static APIService create(String url) {
+            return new RetroJsoup.Builder()
+                    .url(url)
+                    .build()
+                    .create(APIService.class);
+        }
+    }
 }

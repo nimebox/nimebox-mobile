@@ -8,12 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.github.florent37.retrojsoup.RetroJsoup;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.xdk78.nimebox.R;
 import com.xdk78.nimebox.adapter.AnimeAdapter;
-import com.xdk78.nimebox.api.APIService;
+import com.xdk78.nimebox.api.RepositoryProvider;
 import com.xdk78.nimebox.model.Anime;
 
 import java.util.ArrayList;
@@ -21,11 +20,9 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.OkHttpClient;
 
 public class AnimeActivity extends AppCompatActivity {
 
@@ -37,12 +34,13 @@ public class AnimeActivity extends AppCompatActivity {
     private Unbinder unbinder;
     private View view;
     private Drawer result = null;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anime);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //set the back arrow in the toolbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -61,50 +59,34 @@ public class AnimeActivity extends AppCompatActivity {
                 .withSavedInstance(savedInstanceState)
                 .buildView();
 
-        recyclerView = (RecyclerView) findViewById(R.id.anime);
+        recyclerView = findViewById(R.id.anime);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new AnimeAdapter(anime = new ArrayList<>(), this);
         recyclerView.setAdapter(adapter);
 
-        loadAnimeAPI();
+        loadAPI();
     }
 
-    public void loadAnimeAPI() {
-        final OkHttpClient okHttpClient = new OkHttpClient();
+    public void loadAPI() {
         animeUrl = (String) getIntent().getSerializableExtra("animeUrl");
-        final APIService animeAPI = new RetroJsoup.Builder()
-                .url(animeUrl)
-                .client(okHttpClient)
-                .build()
-                .create(APIService.class);
-
-        animeAPI.anime()
-                .toList()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new SingleObserver<List<Anime>>() {
-                                   @Override
-                                   public void onSubscribe(Disposable d) {
-
-                                   }
-
-                                   @Override
-                                   public void onSuccess(List<Anime> anime) {
-                                       adapter.addItems(anime);
-                                   }
-
-                                   @Override
-                                   public void onError(Throwable e) {
-                                       Snackbar.make(view, e.toString(), Snackbar.LENGTH_LONG).show();
-                                   }
-                               }
-                );
+        RepositoryProvider repository = new RepositoryProvider();
+        compositeDisposable.add(
+                repository.provideRepository(animeUrl).getAnime()
+                        .toList()
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(
+                                anime -> adapter.addItems(anime),
+                                e -> Snackbar.make(view, e.toString(), Snackbar.LENGTH_LONG).show()
+                        )
+        );
     }
 
     @Override
     public void onDestroy() {
         unbinder.unbind();
+        compositeDisposable.clear();
         super.onDestroy();
     }
 

@@ -9,10 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.github.florent37.retrojsoup.RetroJsoup;
 import com.xdk78.nimebox.R;
 import com.xdk78.nimebox.adapter.AnimeListAdapter;
-import com.xdk78.nimebox.api.APIService;
+import com.xdk78.nimebox.api.RepositoryProvider;
 import com.xdk78.nimebox.model.AnimeList;
 
 import java.util.ArrayList;
@@ -20,11 +19,9 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.OkHttpClient;
 
 import static com.xdk78.nimebox.util.Utils.ANIME_URL;
 
@@ -35,6 +32,7 @@ public class AnimeListFragment extends Fragment {
     private AnimeListAdapter adapter;
     private List<AnimeList> animeList;
     private Unbinder unbinder;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public AnimeListFragment() {
     }
@@ -46,51 +44,35 @@ public class AnimeListFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_anime_list, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.anime_list);
+        recyclerView = view.findViewById(R.id.anime_list);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new AnimeListAdapter(animeList = new ArrayList<>(), getContext());
         recyclerView.setAdapter(adapter);
 
-        loadAnimesAPI();
+        loadAPI();
         return view;
     }
 
-    public void loadAnimesAPI() {
-        final OkHttpClient okHttpClient = new OkHttpClient();
-
-        final APIService animeAPI = new RetroJsoup.Builder()
-                .url(ANIME_URL)
-                .client(okHttpClient)
-                .build()
-                .create(APIService.class);
-
-        animeAPI.animeList()
-                .toList()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new SingleObserver<List<AnimeList>>() {
-                                   @Override
-                                   public void onSubscribe(Disposable d) {
-
-                                   }
-
-                                   @Override
-                                   public void onSuccess(List<AnimeList> animeList) {
-                                       adapter.addItems(animeList);
-                                   }
-
-                                   @Override
-                                   public void onError(Throwable e) {
-                                       Snackbar.make(view, e.toString(), Snackbar.LENGTH_LONG).show();
-                                   }
-                               }
-                );
+    public void loadAPI() {
+        RepositoryProvider repository = new RepositoryProvider();
+        compositeDisposable.add(
+                repository.provideRepository(ANIME_URL).getAnimeList()
+                        .toList()
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(
+                                animeList -> adapter.addItems(animeList),
+                                e -> Snackbar.make(view, e.toString(), Snackbar.LENGTH_LONG).show()
+                        )
+        );
     }
+
 
     @Override
     public void onDestroyView() {
         unbinder.unbind();
+        compositeDisposable.clear();
         super.onDestroyView();
     }
 }
