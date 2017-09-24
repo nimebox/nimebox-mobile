@@ -3,6 +3,4 @@ Nimebox - aplikacja na Androida do oglądania anime oraz czytania newsów, ale p
 
 ## Wspierane strony
 - senpai.com.pl
-  - [x] news
-  - [x] anime
-- wkrótce kolejne
+
