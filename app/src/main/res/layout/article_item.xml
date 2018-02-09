@@ -31,7 +31,8 @@
             android:adjustViewBounds="true"
             android:clickable="true"
             android:contentDescription="@string/thumbnail"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:focusable="true" />
 
         <TextView
             android:id="@+id/article_description"
