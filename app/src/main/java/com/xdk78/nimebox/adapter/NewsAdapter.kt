@@ -9,13 +9,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.xdk78.nimebox.R
-import com.xdk78.nimebox.mvp.model.ArticleModel
+import com.xdk78.nimebox.mvp.model.NewsModel
 import org.jetbrains.anko.find
 
-/**
- * Created by obsidiam on 11/3/17.
- */
-class ArticleAdapter(private var context: Context, private var items: MutableList<ArticleModel>) : RecyclerView.Adapter<ArticleAdapter.ArticleAdapterViewHolder>() {
+class NewsAdapter(var context: Context, private var items: List<NewsModel>) : RecyclerView.Adapter<NewsAdapter.ArticleAdapterViewHolder>() {
 
     override fun onBindViewHolder(holder: ArticleAdapterViewHolder, position: Int) {
         val items = items[position]

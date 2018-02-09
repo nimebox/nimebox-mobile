@@ -9,7 +9,7 @@ import co.zsmb.materialdrawerkt.draweritems.badgeable.primaryItem
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.Drawer
 import com.xdk78.nimebox.R
-import com.xdk78.nimebox.mvp.base.BaseActivity
+import com.xdk78.nimebox.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -22,7 +22,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, MainFragment.newInstance()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, NewsFragment.newInstance()).commit()
 
         result = drawer {
             hasStableIds = true
@@ -37,15 +37,7 @@ class MainActivity : BaseActivity() {
             primaryItem("News") {
                 identifier = 0
                 onClick { _ ->
-                    val fragment = MainFragment.newInstance()
-                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
-                    true
-                }
-            }
-            primaryItem("Anime") {
-                identifier = 1
-                onClick { _ ->
-                    val fragment = AnimeListFragment.newInstance()
+                    val fragment = NewsFragment.newInstance()
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
                     true
                 }
