@@ -39,7 +39,7 @@ class MainActivity : BaseActivity() {
                 onClick { _ ->
                     val fragment = NewsFragment.newInstance()
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
-                    true
+                    false
                 }
             }
 
@@ -48,7 +48,7 @@ class MainActivity : BaseActivity() {
                 onClick { _ ->
                     val fragment = AnimeListFragment.newInstance()
                     supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
-                    true
+                    false
                 }
             }
         }
