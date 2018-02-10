@@ -3,6 +3,8 @@ package com.xdk78.nimebox.di.module.api
 import com.xdk78.nimebox.api.ApiConstants
 import com.xdk78.nimebox.api.MainApi
 import com.xdk78.nimebox.api.MainRepository
+import com.xdk78.nimebox.base.MainAppSchedulers
+import com.xdk78.nimebox.base.Schedulers
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -38,4 +40,6 @@ class ApiModule {
     @Singleton
     fun provideRxJavaCallAdapter(): RxJava2CallAdapterFactory = RxJava2CallAdapterFactory.create()
 
+    @Provides
+    fun provideMainAppSchedulers(): Schedulers = MainAppSchedulers()
 }

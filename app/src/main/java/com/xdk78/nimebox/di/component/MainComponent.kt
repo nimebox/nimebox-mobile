@@ -1,7 +1,7 @@
 package com.xdk78.nimebox.di.component
 
 import com.xdk78.nimebox.MainApp
-import com.xdk78.nimebox.di.ActivityBuilder
+import com.xdk78.nimebox.di.module.ActivityBuilder
 import com.xdk78.nimebox.di.module.AppModule
 import com.xdk78.nimebox.di.module.api.ApiModule
 import dagger.Component

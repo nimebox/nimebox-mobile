@@ -1,4 +1,4 @@
-package com.xdk78.nimebox.di
+package com.xdk78.nimebox.di.module
 
 import com.xdk78.nimebox.di.module.news.NewsFragmentProvider
 import com.xdk78.nimebox.di.module.news.NewsModule

@@ -1,6 +1,7 @@
 package com.xdk78.nimebox.ui
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -13,6 +14,7 @@ import com.xdk78.nimebox.base.BaseFragment
 import com.xdk78.nimebox.mvp.model.NewsModel
 import com.xdk78.nimebox.mvp.presenter.NewsPresenter
 import com.xdk78.nimebox.mvp.view.NewsView
+import kotlinx.android.synthetic.main.fragment_main.*
 import org.jetbrains.anko.support.v4.find
 import java.io.IOException
 import javax.inject.Inject
@@ -38,6 +40,11 @@ class NewsFragment : BaseFragment(), NewsView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        swiperefresh.setOnRefreshListener {
+            presenter.subscribe(this)
+            swiperefresh.isRefreshing = true
+            presenter.loadData()
+        }
         presenter.subscribe(this)
         presenter.loadData()
     }
@@ -48,11 +55,17 @@ class NewsFragment : BaseFragment(), NewsView {
         recyclerView.layoutManager = LinearLayoutManager(context)
         adapter = NewsAdapter(context!!, items)
         recyclerView.adapter = adapter
+
+        swiperefresh.isRefreshing = false
     }
 
     override fun onError(e: Throwable?) {
         when (e) {
-            is IOException -> Log.e("api", e.message)
+            is IOException -> {
+                Log.e("api", e.message)
+                Snackbar.make(this.view!!, e.toString(), Snackbar.LENGTH_LONG).show()
+                swiperefresh.isRefreshing = false
+            }
             else -> Log.e("api", "List is empty")
         }
     }
