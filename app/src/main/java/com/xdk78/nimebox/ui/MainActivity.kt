@@ -42,6 +42,15 @@ class MainActivity : BaseActivity() {
                     true
                 }
             }
+
+            primaryItem("Anime") {
+                identifier = 1
+                onClick { _ ->
+                    val fragment = AnimeListFragment.newInstance()
+                    supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+                    true
+                }
+            }
         }
     }
 

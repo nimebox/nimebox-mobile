@@ -1,5 +1,7 @@
 package com.xdk78.nimebox.di.module
 
+import com.xdk78.nimebox.di.module.anime.AnimeListFragmentProvider
+import com.xdk78.nimebox.di.module.anime.AnimeListModule
 import com.xdk78.nimebox.di.module.news.NewsFragmentProvider
 import com.xdk78.nimebox.di.module.news.NewsModule
 import com.xdk78.nimebox.ui.MainActivity
@@ -10,7 +12,10 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class ActivityBuilder {
 
-    @ContributesAndroidInjector(modules = [NewsModule::class, NewsFragmentProvider::class])
+    @ContributesAndroidInjector(modules = [
+        NewsModule::class, NewsFragmentProvider::class,
+        AnimeListModule::class, AnimeListFragmentProvider::class
+    ])
     abstract fun bindMainActivity(): MainActivity
 
 }
