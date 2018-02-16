@@ -5,25 +5,19 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import com.bumptech.glide.Glide
 import com.xdk78.nimebox.R
 import com.xdk78.nimebox.mvp.model.AnimeListModel
-import org.jetbrains.anko.find
+import com.xdk78.nimebox.util.loadImage
+import kotlinx.android.synthetic.main.anime_list_layout.view.*
 
 
 class AnimeListAdapter(var context: Context, private var items: List<AnimeListModel>) : RecyclerView.Adapter<AnimeListAdapter.AnimeListAdapterViewHolder>() {
 
     override fun onBindViewHolder(holder: AnimeListAdapterViewHolder, position: Int) {
         val items = items[position]
-        holder.title.text = items.title
-
-        Glide.with(context)
-                .load(items.image)
-                .into(holder.image)
-
-        holder.description.text = items.description
+        holder.itemView.anime_title.text = items.title
+        holder.itemView.anime_description.text = items.description
+        holder.itemView.anime_image.loadImage(items.image)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): AnimeListAdapterViewHolder {
@@ -35,9 +29,6 @@ class AnimeListAdapter(var context: Context, private var items: List<AnimeListMo
         return items.size
     }
 
-    class AnimeListAdapterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val title: TextView = view.find(R.id.anime_title)
-        val description: TextView = view.find(R.id.anime_description)
-        val image: ImageView = view.find(R.id.anime_image)
-    }
+    class AnimeListAdapterViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
 }
