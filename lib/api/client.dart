@@ -41,13 +41,13 @@ class ApiClient {
       if (_secrets == null) {
         _secrets = await loadSecrets();
       }
-      var newsResponse = await this.client.get('${_secrets.baseUrl}/v1/anime',
+      var animeListResponse = await this.client.get('${_secrets.baseUrl}/v1/anime',
           options: Options(
               connectTimeout: 15000,
               headers: {'Authorization': 'Bearer ${_secrets.token}'}));
 
       AnimeListResponse response = serializers.deserializeWith(
-          AnimeListResponse.serializer, newsResponse.data);
+          AnimeListResponse.serializer, animeListResponse.data);
 
       return response;
     } catch (error) {
