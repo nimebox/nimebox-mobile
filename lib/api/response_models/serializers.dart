@@ -5,6 +5,11 @@ import 'package:nimebox/api/api.dart';
 
 part 'serializers.g.dart';
 
-@SerializersFor(const [NewsResponse, NewsDataResponse])
+@SerializersFor(const [
+  NewsResponse,
+  NewsDataResponse,
+  AnimeListResponse,
+  AnimeListDataResponse
+])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

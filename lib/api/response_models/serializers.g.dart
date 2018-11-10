@@ -20,8 +20,14 @@ part of 'serializers.dart';
 // ignore_for_file: test_types_in_equals
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(AnimeListDataResponse.serializer)
+      ..add(AnimeListResponse.serializer)
       ..add(NewsDataResponse.serializer)
       ..add(NewsResponse.serializer)
+      ..addBuilderFactory(
+          const FullType(
+              BuiltList, const [const FullType(AnimeListDataResponse)]),
+          () => new ListBuilder<AnimeListDataResponse>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(NewsDataResponse)]),
           () => new ListBuilder<NewsDataResponse>()))
