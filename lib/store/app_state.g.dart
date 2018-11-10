@@ -34,6 +34,9 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
       'newsState',
       serializers.serialize(object.newsState,
           specifiedType: const FullType(NewsState)),
+      'animeListState',
+      serializers.serialize(object.animeListState,
+          specifiedType: const FullType(AnimeListState)),
     ];
 
     return result;
@@ -54,6 +57,10 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
           result.newsState.replace(serializers.deserialize(value,
               specifiedType: const FullType(NewsState)) as NewsState);
           break;
+        case 'animeListState':
+          result.animeListState.replace(serializers.deserialize(value,
+              specifiedType: const FullType(AnimeListState)) as AnimeListState);
+          break;
       }
     }
 
@@ -64,13 +71,18 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
 class _$AppState extends AppState {
   @override
   final NewsState newsState;
+  @override
+  final AnimeListState animeListState;
 
   factory _$AppState([void updates(AppStateBuilder b)]) =>
       (new AppStateBuilder()..update(updates)).build();
 
-  _$AppState._({this.newsState}) : super._() {
+  _$AppState._({this.newsState, this.animeListState}) : super._() {
     if (newsState == null) {
       throw new BuiltValueNullFieldError('AppState', 'newsState');
+    }
+    if (animeListState == null) {
+      throw new BuiltValueNullFieldError('AppState', 'animeListState');
     }
   }
 
@@ -84,18 +96,21 @@ class _$AppState extends AppState {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is AppState && newsState == other.newsState;
+    return other is AppState &&
+        newsState == other.newsState &&
+        animeListState == other.animeListState;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, newsState.hashCode));
+    return $jf($jc($jc(0, newsState.hashCode), animeListState.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('AppState')
-          ..add('newsState', newsState))
+          ..add('newsState', newsState)
+          ..add('animeListState', animeListState))
         .toString();
   }
 }
@@ -108,11 +123,18 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       _$this._newsState ??= new NewsStateBuilder();
   set newsState(NewsStateBuilder newsState) => _$this._newsState = newsState;
 
+  AnimeListStateBuilder _animeListState;
+  AnimeListStateBuilder get animeListState =>
+      _$this._animeListState ??= new AnimeListStateBuilder();
+  set animeListState(AnimeListStateBuilder animeListState) =>
+      _$this._animeListState = animeListState;
+
   AppStateBuilder();
 
   AppStateBuilder get _$this {
     if (_$v != null) {
       _newsState = _$v.newsState?.toBuilder();
+      _animeListState = _$v.animeListState?.toBuilder();
       _$v = null;
     }
     return this;
@@ -135,12 +157,17 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   _$AppState build() {
     _$AppState _$result;
     try {
-      _$result = _$v ?? new _$AppState._(newsState: newsState.build());
+      _$result = _$v ??
+          new _$AppState._(
+              newsState: newsState.build(),
+              animeListState: animeListState.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'newsState';
         newsState.build();
+        _$failedField = 'animeListState';
+        animeListState.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'AppState', _$failedField, e.toString());

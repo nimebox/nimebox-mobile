@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:nimebox/store/app_state.dart';
+import 'package:nimebox/store/middleware.dart';
+import 'package:nimebox/store/reducer.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:nimebox/keys.dart';
 import 'package:redux_logging/redux_logging.dart';
-import 'package:nimebox/store/store.dart';
 import 'package:nimebox/screens/screens.dart';
 
 void main() {
@@ -39,7 +41,9 @@ class NimeboxApp extends StatelessWidget {
                   borderSide: BorderSide(color: Colors.indigo),
                 ),
               )),
-          routes: {'/': (context) => NewsScreen()},
+          routes: {
+            '/': (context) => MainScreen(),
+          },
         ));
   }
 }

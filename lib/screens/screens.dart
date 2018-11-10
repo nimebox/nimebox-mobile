@@ -1,1 +1,1 @@
-export 'news_screen.dart';
+export 'main_screen.dart';

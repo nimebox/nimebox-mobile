@@ -1,5 +1,6 @@
+import 'package:nimebox/store/news/actions.dart';
+import 'package:nimebox/store/news/state.dart';
 import 'package:redux/redux.dart';
-import 'package:nimebox/store/store.dart';
 
 Reducer<NewsState> newsReducer = combineReducers<NewsState>(
   [
