@@ -41,6 +41,9 @@ class _$NewsDataResponseSerializer
       'description',
       serializers.serialize(object.description,
           specifiedType: const FullType(String)),
+      'image',
+      serializers.serialize(object.image,
+          specifiedType: const FullType(String)),
     ];
 
     return result;
@@ -69,6 +72,10 @@ class _$NewsDataResponseSerializer
           result.description = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'image':
+          result.image = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
       }
     }
 
@@ -83,11 +90,14 @@ class _$NewsDataResponse extends NewsDataResponse {
   final String url;
   @override
   final String description;
+  @override
+  final String image;
 
   factory _$NewsDataResponse([void updates(NewsDataResponseBuilder b)]) =>
       (new NewsDataResponseBuilder()..update(updates)).build();
 
-  _$NewsDataResponse._({this.title, this.url, this.description}) : super._() {
+  _$NewsDataResponse._({this.title, this.url, this.description, this.image})
+      : super._() {
     if (title == null) {
       throw new BuiltValueNullFieldError('NewsDataResponse', 'title');
     }
@@ -96,6 +106,9 @@ class _$NewsDataResponse extends NewsDataResponse {
     }
     if (description == null) {
       throw new BuiltValueNullFieldError('NewsDataResponse', 'description');
+    }
+    if (image == null) {
+      throw new BuiltValueNullFieldError('NewsDataResponse', 'image');
     }
   }
 
@@ -113,13 +126,15 @@ class _$NewsDataResponse extends NewsDataResponse {
     return other is NewsDataResponse &&
         title == other.title &&
         url == other.url &&
-        description == other.description;
+        description == other.description &&
+        image == other.image;
   }
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc($jc(0, title.hashCode), url.hashCode), description.hashCode));
+    return $jf($jc(
+        $jc($jc($jc(0, title.hashCode), url.hashCode), description.hashCode),
+        image.hashCode));
   }
 
   @override
@@ -127,7 +142,8 @@ class _$NewsDataResponse extends NewsDataResponse {
     return (newBuiltValueToStringHelper('NewsDataResponse')
           ..add('title', title)
           ..add('url', url)
-          ..add('description', description))
+          ..add('description', description)
+          ..add('image', image))
         .toString();
   }
 }
@@ -148,6 +164,10 @@ class NewsDataResponseBuilder
   String get description => _$this._description;
   set description(String description) => _$this._description = description;
 
+  String _image;
+  String get image => _$this._image;
+  set image(String image) => _$this._image = image;
+
   NewsDataResponseBuilder();
 
   NewsDataResponseBuilder get _$this {
@@ -155,6 +175,7 @@ class NewsDataResponseBuilder
       _title = _$v.title;
       _url = _$v.url;
       _description = _$v.description;
+      _image = _$v.image;
       _$v = null;
     }
     return this;
@@ -177,7 +198,7 @@ class NewsDataResponseBuilder
   _$NewsDataResponse build() {
     final _$result = _$v ??
         new _$NewsDataResponse._(
-            title: title, url: url, description: description);
+            title: title, url: url, description: description, image: image);
     replace(_$result);
     return _$result;
   }

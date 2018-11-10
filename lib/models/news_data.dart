@@ -11,11 +11,14 @@ abstract class NewsDataModel
 
   String get description;
 
+  String get image;
+
   factory NewsDataModel.mapFromResponse(NewsDataResponse response) {
     return _$NewsDataModel._(
         title: response.title,
         url: response.url,
-        description: response.description);
+        description: response.description,
+        image: response.image);
   }
 
   NewsDataModel._();

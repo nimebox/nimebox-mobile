@@ -14,6 +14,8 @@ abstract class NewsDataResponse
 
   String get description;
 
+  String get image;
+
   NewsDataResponse._();
   static Serializer<NewsDataResponse> get serializer =>
       _$newsDataResponseSerializer;

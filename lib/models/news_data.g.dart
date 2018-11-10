@@ -26,11 +26,14 @@ class _$NewsDataModel extends NewsDataModel {
   final String url;
   @override
   final String description;
+  @override
+  final String image;
 
   factory _$NewsDataModel([void updates(NewsDataModelBuilder b)]) =>
       (new NewsDataModelBuilder()..update(updates)).build();
 
-  _$NewsDataModel._({this.title, this.url, this.description}) : super._() {
+  _$NewsDataModel._({this.title, this.url, this.description, this.image})
+      : super._() {
     if (title == null) {
       throw new BuiltValueNullFieldError('NewsDataModel', 'title');
     }
@@ -39,6 +42,9 @@ class _$NewsDataModel extends NewsDataModel {
     }
     if (description == null) {
       throw new BuiltValueNullFieldError('NewsDataModel', 'description');
+    }
+    if (image == null) {
+      throw new BuiltValueNullFieldError('NewsDataModel', 'image');
     }
   }
 
@@ -55,13 +61,15 @@ class _$NewsDataModel extends NewsDataModel {
     return other is NewsDataModel &&
         title == other.title &&
         url == other.url &&
-        description == other.description;
+        description == other.description &&
+        image == other.image;
   }
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc($jc(0, title.hashCode), url.hashCode), description.hashCode));
+    return $jf($jc(
+        $jc($jc($jc(0, title.hashCode), url.hashCode), description.hashCode),
+        image.hashCode));
   }
 
   @override
@@ -69,7 +77,8 @@ class _$NewsDataModel extends NewsDataModel {
     return (newBuiltValueToStringHelper('NewsDataModel')
           ..add('title', title)
           ..add('url', url)
-          ..add('description', description))
+          ..add('description', description)
+          ..add('image', image))
         .toString();
   }
 }
@@ -90,6 +99,10 @@ class NewsDataModelBuilder
   String get description => _$this._description;
   set description(String description) => _$this._description = description;
 
+  String _image;
+  String get image => _$this._image;
+  set image(String image) => _$this._image = image;
+
   NewsDataModelBuilder();
 
   NewsDataModelBuilder get _$this {
@@ -97,6 +110,7 @@ class NewsDataModelBuilder
       _title = _$v.title;
       _url = _$v.url;
       _description = _$v.description;
+      _image = _$v.image;
       _$v = null;
     }
     return this;
@@ -118,7 +132,8 @@ class NewsDataModelBuilder
   @override
   _$NewsDataModel build() {
     final _$result = _$v ??
-        new _$NewsDataModel._(title: title, url: url, description: description);
+        new _$NewsDataModel._(
+            title: title, url: url, description: description, image: image);
     replace(_$result);
     return _$result;
   }

@@ -45,7 +45,7 @@ class NewsScreen extends StatelessWidget {
                                 children: [
                                   CachedNetworkImage(
                                       placeholder: CircularProgressIndicator(),
-                                      imageUrl: item.url),
+                                      imageUrl: item.image),
                                   ListTile(
                                     title: Text(item.title),
                                     subtitle: Text(item.description),
