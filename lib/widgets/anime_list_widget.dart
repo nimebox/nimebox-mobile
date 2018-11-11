@@ -33,30 +33,35 @@ class AnimeListWidget extends StatelessWidget {
                         physics: ClampingScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: state.animeList.data.length,
+                        itemExtent: 128,
                         itemBuilder: (context, index) {
                           AnimeListDataModel item = state.animeList.data[index];
                           return Card(
-                            elevation: 2,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                CachedNetworkImage(
-                                    placeholder: CircularProgressIndicator(),
-                                    imageUrl: item.image,
-                                    height: 128,
-                                    width: 96,
-                                    fit: BoxFit.fitWidth),
-                                Expanded(
-                                  child: Text(
-                                    item.title,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize: 16.0),
-                                  ),
+                              elevation: 2,
+                              child: InkWell(
+                                onTap: () {},
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    CachedNetworkImage(
+                                        placeholder:
+                                            CircularProgressIndicator(),
+                                        imageUrl: item.image,
+                                        height: 128,
+                                        width: 96,
+                                        fit: BoxFit.fitWidth),
+                                    Expanded(
+                                      child: Text(
+                                        item.title,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontSize: 16.0),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          );
+                              ));
                         }));
               });
             }));

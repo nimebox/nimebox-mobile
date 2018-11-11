@@ -7,6 +7,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:nimebox/keys.dart';
 import 'package:redux_logging/redux_logging.dart';
 import 'package:nimebox/screens/screens.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   final store =
@@ -14,6 +15,9 @@ void main() {
     LoggingMiddleware.printer(),
     appMiddleware,
   ]);
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+  ));
   runApp(NimeboxApp(
     store: store,
   ));
