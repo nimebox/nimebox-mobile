@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:nimebox/models/models.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:nimebox/screens/anime_details_screen.dart';
 import 'package:nimebox/store/app_state.dart';
 import 'package:nimebox/store/anime_list/actions.dart';
 import 'package:nimebox/store/anime_list/state.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class AnimeListWidget extends StatelessWidget {
   @override
@@ -22,7 +24,10 @@ class AnimeListWidget extends StatelessWidget {
                 );
               } else if (!state.isLoading && state.error != null) {
                 return Center(
-                  child: Text('Wystąpił błąd: ${state.error}'),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Wystąpił błąd: ${state.error}'),
+                  ),
                 );
               }
               return StoreConnector<AppState, VoidCallback>(converter: (store) {
@@ -39,7 +44,15 @@ class AnimeListWidget extends StatelessWidget {
                           return Card(
                               elevation: 2,
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          AnimeDetailsScreen(item: item),
+                                    ),
+                                  );
+                                },
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment:
@@ -47,7 +60,7 @@ class AnimeListWidget extends StatelessWidget {
                                   children: <Widget>[
                                     CachedNetworkImage(
                                         placeholder:
-                                            CircularProgressIndicator(),
+                                            Image.memory(kTransparentImage),
                                         imageUrl: item.image,
                                         height: 128,
                                         width: 96,

@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:nimebox/store/app_state.dart';
 import 'package:nimebox/store/news/actions.dart';
 import 'package:nimebox/store/news/state.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class NewsWidget extends StatelessWidget {
   @override
@@ -22,7 +23,10 @@ class NewsWidget extends StatelessWidget {
                 );
               } else if (!state.isLoading && state.error != null) {
                 return Center(
-                  child: Text('Wystąpił błąd: ${state.error}'),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Wystąpił błąd: ${state.error}'),
+                  ),
                 );
               }
               return StoreConnector<AppState, VoidCallback>(converter: (store) {
@@ -41,7 +45,8 @@ class NewsWidget extends StatelessWidget {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 CachedNetworkImage(
-                                    placeholder: CircularProgressIndicator(),
+                                    placeholder:
+                                        Image.memory(kTransparentImage),
                                     imageUrl: item.image),
                                 ListTile(
                                   title: Text(item.title),

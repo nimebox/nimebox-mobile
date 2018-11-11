@@ -11,11 +11,11 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
-  String _title = 'Newsy';
+  String _title = 'Anime';
 
   final List<Widget> _children = [
-    NewsWidget(),
     AnimeListWidget(),
+    NewsWidget(),
   ];
 
   void onTabTapped(int index) {
@@ -25,11 +25,11 @@ class _MainScreenState extends State<MainScreen> {
 
     if (index == 0) {
       setState(() {
-        _title = 'Newsy';
+        _title = 'Anime';
       });
     } else if (index == 1) {
       setState(() {
-        _title = 'Anime';
+        _title = 'News';
       });
     }
   }
@@ -48,15 +48,15 @@ class _MainScreenState extends State<MainScreen> {
           items: [
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.rss_feed,
-              ),
-              title: Text('Newsy'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
                 Icons.video_library,
               ),
               title: Text('Anime'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.rss_feed,
+              ),
+              title: Text('News'),
             ),
           ]),
     );
