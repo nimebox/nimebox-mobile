@@ -20,10 +20,15 @@ part of 'serializers.dart';
 // ignore_for_file: test_types_in_equals
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(AnimeDataResponse.serializer)
       ..add(AnimeListDataResponse.serializer)
       ..add(AnimeListResponse.serializer)
+      ..add(AnimeResponse.serializer)
       ..add(NewsDataResponse.serializer)
       ..add(NewsResponse.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(AnimeDataResponse)]),
+          () => new ListBuilder<AnimeDataResponse>())
       ..addBuilderFactory(
           const FullType(
               BuiltList, const [const FullType(AnimeListDataResponse)]),

@@ -35,20 +35,42 @@ class ApiClient {
     }
   }
 
-  /// Fetch anime list data
-  Future<AnimeListResponse> fetchAnimeList() async {
+  /// Fetch data for anime list with optional [provider]
+  Future<AnimeListResponse> fetchAnimeList({String provider = 'senpai'}) async {
     try {
       if (_secrets == null) {
         _secrets = await loadSecrets();
       }
       var animeListResponse = await this.client.get(
-          '${_secrets.baseUrl}/v1/anime',
+          '${_secrets.baseUrl}/v1/anime?provider=$provider',
           options: Options(
               connectTimeout: 15000,
               headers: {'Authorization': 'Bearer ${_secrets.token}'}));
 
       AnimeListResponse response = serializers.deserializeWith(
           AnimeListResponse.serializer, animeListResponse.data);
+
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  /// Fetch data for given anime [title] with optional [provider]
+  Future<AnimeResponse> fetchAnime(String title,
+      {String provider = 'senpai'}) async {
+    try {
+      if (_secrets == null) {
+        _secrets = await loadSecrets();
+      }
+      var animeResponse = await this.client.get(
+          '${_secrets.baseUrl}/v1/anime/$title?provider=$provider',
+          options: Options(
+              connectTimeout: 15000,
+              headers: {'Authorization': 'Bearer ${_secrets.token}'}));
+
+      AnimeResponse response = serializers.deserializeWith(
+          AnimeResponse.serializer, animeResponse.data);
 
       return response;
     } catch (error) {

@@ -30,53 +30,51 @@ class AnimeListWidget extends StatelessWidget {
                   ),
                 );
               }
-              return StoreConnector<AppState, VoidCallback>(converter: (store) {
-                return () => store.dispatch(LoadAnimeList());
-              }, builder: (context, callback) {
-                return Container(
-                    child: ListView.builder(
-                        physics: ClampingScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: state.animeList.data.length,
-                        itemExtent: 128,
-                        itemBuilder: (context, index) {
-                          AnimeListDataModel item = state.animeList.data[index];
-                          return Card(
-                              elevation: 2,
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          AnimeDetailsScreen(item: item),
-                                    ),
-                                  );
-                                },
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    CachedNetworkImage(
-                                        placeholder:
-                                            Image.memory(kTransparentImage),
-                                        imageUrl: item.image,
-                                        height: 128,
-                                        width: 96,
-                                        fit: BoxFit.fitWidth),
-                                    Expanded(
-                                      child: Text(
-                                        item.title,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(fontSize: 16.0),
-                                      ),
-                                    ),
-                                  ],
+              return ListView.builder(
+                  physics: ClampingScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: state.animeList.data.length,
+                  itemExtent: 128,
+                  itemBuilder: (context, index) {
+                    AnimeListDataModel item = state.animeList.data[index];
+                    return Card(
+                        elevation: 2,
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AnimeDetailsScreen(item: item),
+                              ),
+                            );
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              SizedBox(
+                                height: 128,
+                                width: 96,
+                                child: CachedNetworkImage(
+                                    placeholder:
+                                        Image.memory(kTransparentImage),
+                                    imageUrl: item.image,
+                                    height: 128,
+                                    width: 96,
+                                    fit: BoxFit.fitWidth),
+                              ),
+                              Expanded(
+                                child: Text(
+                                  item.title,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 16.0),
                                 ),
-                              ));
-                        }));
-              });
+                              ),
+                            ],
+                          ),
+                        ));
+                  });
             }));
   }
 }

@@ -9,7 +9,9 @@ part 'serializers.g.dart';
   NewsResponse,
   NewsDataResponse,
   AnimeListResponse,
-  AnimeListDataResponse
+  AnimeListDataResponse,
+  AnimeResponse,
+  AnimeDataResponse,
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

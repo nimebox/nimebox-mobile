@@ -29,34 +29,28 @@ class NewsWidget extends StatelessWidget {
                   ),
                 );
               }
-              return StoreConnector<AppState, VoidCallback>(converter: (store) {
-                return () => store.dispatch(LoadNews());
-              }, builder: (context, callback) {
-                return Container(
-                    child: ListView.builder(
-                        physics: ClampingScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: state.news.data.length,
-                        itemBuilder: (context, index) {
-                          NewsDataModel item = state.news.data[index];
-                          return Card(
-                            elevation: 2,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                CachedNetworkImage(
-                                    placeholder:
-                                        Image.memory(kTransparentImage),
-                                    imageUrl: item.image),
-                                ListTile(
-                                  title: Text(item.title),
-                                  subtitle: Text(item.description),
-                                ),
-                              ],
-                            ),
-                          );
-                        }));
-              });
+              return ListView.builder(
+                  physics: ClampingScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: state.news.data.length,
+                  itemBuilder: (context, index) {
+                    NewsDataModel item = state.news.data[index];
+                    return Card(
+                      elevation: 2,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CachedNetworkImage(
+                              placeholder: Image.memory(kTransparentImage),
+                              imageUrl: item.image),
+                          ListTile(
+                            title: Text(item.title),
+                            subtitle: Text(item.description),
+                          ),
+                        ],
+                      ),
+                    );
+                  });
             }));
   }
 }

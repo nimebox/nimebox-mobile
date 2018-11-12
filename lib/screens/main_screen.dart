@@ -63,7 +63,7 @@ class _MainScreenState extends State<MainScreen> {
                           ListTile(
                               leading: Icon(Icons.bug_report),
                               title: Text('Zgłoś błąd'),
-                              onTap: () => launchURL(context,
+                              onTap: () => launchUrl(context,
                                   'https://github.com/nimebox/nimebox-mobile/issues')),
                         ],
                       );
