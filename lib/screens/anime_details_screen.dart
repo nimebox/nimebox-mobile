@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_advanced_networkimage/flutter_advanced_networkimage.dart';
 import 'package:flutter/material.dart';
 import 'package:nimebox/models/models.dart';
 import 'package:nimebox/widgets/anime_widget.dart';
@@ -48,11 +48,12 @@ class _AnimeDetailsScreenState extends State<AnimeDetailsScreen> {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            CachedNetworkImage(
-                                imageUrl: widget.item.image,
+                            Image(
                                 height: 200,
                                 width: 136,
-                                fit: BoxFit.contain),
+                                fit: BoxFit.contain,
+                                image: AdvancedNetworkImage(widget.item.image,
+                                    useDiskCache: true)),
                             Expanded(
                                 child: Padding(
                                     padding: EdgeInsets.all(8),

@@ -10,14 +10,14 @@ import 'package:nimebox/screens/screens.dart';
 import 'package:flutter/services.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+  ));
   final store =
       Store<AppState>(appReducer, initialState: AppState(), middleware: [
     LoggingMiddleware.printer(),
     appMiddleware,
   ]);
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-  ));
   runApp(NimeboxApp(
     store: store,
   ));
@@ -36,18 +36,10 @@ class NimeboxApp extends StatelessWidget {
           title: 'Nimebox',
           navigatorKey: Keys.navKey,
           theme: ThemeData(
-              primaryColor: Colors.white,
-              accentColor: Colors.indigo,
-              hintColor: Colors.grey,
-              inputDecorationTheme: InputDecorationTheme(
-                labelStyle: TextStyle(color: Colors.indigo),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.indigo),
-                ),
-              )),
-          routes: {
-            '/': (context) => MainScreen(),
-          },
+            primaryColor: Colors.white,
+            accentColor: Colors.indigo,
+          ),
+          home: MainScreen(),
         ));
   }
 }

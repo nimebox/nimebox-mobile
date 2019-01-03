@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_advanced_networkimage/flutter_advanced_networkimage.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:nimebox/models/models.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:nimebox/store/app_state.dart';
 import 'package:nimebox/store/news/actions.dart';
 import 'package:nimebox/store/news/state.dart';
-import 'package:transparent_image/transparent_image.dart';
+import 'package:nimebox/utils.dart';
 
 class NewsWidget extends StatelessWidget {
   @override
@@ -29,28 +29,34 @@ class NewsWidget extends StatelessWidget {
                   ),
                 );
               }
-              return ListView.builder(
-                  physics: ClampingScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: state.news.data.length,
-                  itemBuilder: (context, index) {
-                    NewsDataModel item = state.news.data[index];
-                    return Card(
-                      elevation: 2,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          CachedNetworkImage(
-                              placeholder: Image.memory(kTransparentImage),
-                              imageUrl: item.image),
-                          ListTile(
-                            title: Text(item.title),
-                            subtitle: Text(item.description),
-                          ),
-                        ],
-                      ),
-                    );
-                  });
+              return ScrollConfiguration(
+                behavior: NotSuddenJumpScrollBehavior(),
+                child: ListView.builder(
+                    physics: NotSuddenJumpPhysics(),
+                    shrinkWrap: true,
+                    itemCount: state.news.data.length,
+                    itemBuilder: (context, index) {
+                      NewsDataModel item = state.news.data[index];
+                      return Card(
+                        elevation: 2,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Image(
+                                height: 128,
+                                width: 96,
+                                fit: BoxFit.fitWidth,
+                                image: AdvancedNetworkImage(item.image,
+                                    useDiskCache: true)),
+                            ListTile(
+                              title: Text(item.title),
+                              subtitle: Text(item.description),
+                            ),
+                          ],
+                        ),
+                      );
+                    }),
+              );
             }));
   }
 }

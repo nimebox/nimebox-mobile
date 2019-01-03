@@ -23,3 +23,23 @@ void launchUrl(BuildContext context, String url) async {
     debugPrint(e.toString());
   }
 }
+
+/// Work around flutter#20495
+class NotSuddenJumpPhysics extends ClampingScrollPhysics {
+  @override
+  double get dragStartDistanceMotionThreshold => 3.5;
+}
+
+class NotSuddenJumpScrollBehavior extends ScrollBehavior {
+  @override
+  ScrollPhysics getScrollPhysics(BuildContext context) {
+    switch (getPlatform(context)) {
+      case TargetPlatform.iOS:
+        return const BouncingScrollPhysics();
+      case TargetPlatform.android:
+      case TargetPlatform.fuchsia:
+        return NotSuddenJumpPhysics();
+    }
+    return null;
+  }
+}

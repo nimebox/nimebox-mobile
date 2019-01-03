@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nimebox/widgets/news_widget.dart';
+// import 'package:nimebox/widgets/news_widget.dart';
 import 'package:nimebox/widgets/anime_list_widget.dart';
 import 'package:nimebox/utils.dart';
 import 'package:package_info/package_info.dart';
@@ -17,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _children = [
     AnimeListWidget(),
-    NewsWidget(),
+    // NewsWidget(),
   ];
 
   void onTabTapped(int index) {
@@ -29,11 +29,12 @@ class _MainScreenState extends State<MainScreen> {
       setState(() {
         _title = 'Anime';
       });
-    } else if (index == 1) {
-      setState(() {
-        _title = 'News';
-      });
     }
+    // else if (index == 1) {
+    //   setState(() {
+    //     _title = 'News';
+    //   });
+    // }
   }
 
   @override
@@ -72,24 +73,24 @@ class _MainScreenState extends State<MainScreen> {
         ],
       ),
       body: _children[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-          onTap: onTabTapped,
-          currentIndex: _currentIndex,
-          fixedColor: Colors.indigo,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.video_library,
-              ),
-              title: Text('Anime'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.rss_feed,
-              ),
-              title: Text('News'),
-            ),
-          ]),
+      // bottomNavigationBar: BottomNavigationBar(
+      //     onTap: onTabTapped,
+      //     currentIndex: _currentIndex,
+      //     fixedColor: Colors.indigo,
+      //     items: [
+      //       BottomNavigationBarItem(
+      //         icon: Icon(
+      //           Icons.video_library,
+      //         ),
+      //         title: Text('Anime'),
+      //       ),
+      //       BottomNavigationBarItem(
+      //         icon: Icon(
+      //           Icons.rss_feed,
+      //         ),
+      //         title: Text('News'),
+      //       ),
+      //     ]),
     );
   }
 }
